@@ -40,10 +40,18 @@ jog_alf(int n){
     switch(n){
 
     case 1:
-        printf("[x]");
+        printf("[");
+        SetConsoleTextAttribute(12, 3);
+        printf("x");
+        SetConsoleTextAttribute(12, 6);
+        printf("]");
     break;
     case 2:
-        printf("[o]");
+        printf("[");
+        SetConsoleTextAttribute(12, 4);
+        printf("o");
+        SetConsoleTextAttribute(12, 6);
+        printf("]");
     break;
 
     }
@@ -116,14 +124,11 @@ void tabela(int v[9][9]){
 
     printf("\t\t\t\t\t     ");
 
+    SetConsoleTextAttribute(12, 6);
+
     for(co = 1; co <= 9; co++) col_alf(co);
 
     printf("\n");
-
-    if(init == 0){
-            pos_init_jog1(v);
-            pos_init_jog2(v);
-    }
 
     init = 1;
 
@@ -136,5 +141,7 @@ void tabela(int v[9][9]){
         }
         printf("\n");
     }
+
+    SetConsoleTextAttribute(12, 7);
 
 }
