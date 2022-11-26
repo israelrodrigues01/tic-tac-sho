@@ -13,3 +13,59 @@
 
 1668689918 c:\users\ufca\desktop\liberada\tic-tac-sho2-main\tabela.h
 
+1668699136 source:c:\users\ufca\desktop\liberada\claylton muniz\proj\tic-tac-sho\main.c
+	<stdio.h>
+	<stdlib.h>
+	<locale.h>
+	<ctype.h>
+	"tabela.h"
+	"jogabilidade.h"
+
+1668695595 c:\users\ufca\desktop\liberada\claylton muniz\proj\tic-tac-sho\tabela.h
+
+1668701390 c:\users\ufca\desktop\liberada\claylton muniz\proj\tic-tac-sho\jogabilidade.h
+
+1668731267 source:c:\users\administrador\downloads\tic-tac-sho-20221117t201141z-001\tic-tac-sho\main.c
+	<stdio.h>
+	<stdlib.h>
+	<locale.h>
+	"tabela.h"
+	"jogabilidade.h"
+
+1668731970 c:\users\administrador\downloads\tic-tac-sho-20221117t201141z-001\tic-tac-sho\tabela.h
+
+1668731267 c:\users\administrador\downloads\tic-tac-sho-20221117t201141z-001\tic-tac-sho\jogabilidade.h
+
+1668731267 source:c:\users\clayltonsilva\documents\claylton projetos\tic-tac-sho\main.c
+	<stdio.h>
+	<stdlib.h>
+	<locale.h>
+	"tabela.h"
+	"jogabilidade.h"
+
+1668817242 c:\users\clayltonsilva\documents\claylton projetos\tic-tac-sho\tabela.h
+
+1668817664 c:\users\clayltonsilva\documents\claylton projetos\tic-tac-sho\jogabilidade.h
+
+1668872833 source:c:\users\clayltonsilva\documents\proj_code\tic-tac-sho\main.c
+	<stdio.h>
+	<stdlib.h>
+	<locale.h>
+	"tabela.h"
+	"jogabilidade.h"
+
+1668868515 c:\users\clayltonsilva\documents\proj_code\tic-tac-sho\tabela.h
+
+1668872833 c:\users\clayltonsilva\documents\proj_code\tic-tac-sho\jogabilidade.h
+
+1668872833 source:c:\users\casa\desktop\tictacsho\tic-tac-sho\main.c
+	<stdio.h>
+	<stdlib.h>
+	<locale.h>
+	"tabela.h"
+	"jogabilidade.h"
+
+1668868515 c:\users\casa\desktop\tictacsho\tic-tac-sho\tabela.h
+
+1668872833 c:\users\casa\desktop\tictacsho\tic-tac-sho\jogabilidade.h
+

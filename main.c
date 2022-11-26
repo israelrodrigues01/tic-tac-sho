@@ -1,22 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <locale.h>
 #include "tabela.h"
-
-int verficador(int *start){
-
-    printf(
-               "\n\n\n"
-               "Jogo finalizado!!! Deseja jogar novamente?\n"
-               "0 - Não\n"
-               "1 - Sim"
-               );
-        scanf("%d", &start);
-        printf("\n\n\n");
-
-    return start;
-}
+#include "jogabilidade.h"
 
 int main(){
+
+    setlocale(LC_ALL, "portuguese");
 
     srand(time(0));
 
@@ -26,15 +16,18 @@ int main(){
             for(j = 0; j < 9; j++)
                 tab[i][j] = 0;
 
-    pos_init_jog1(tab);
-    pos_init_jog2(tab);
+    //tab[8][7] = 1;
+    //tab[5][4] = 2;
+
+    jog_pos_init(tab);
 
     do{
 
-        tabela(tab);
-        start = verficador(&start);
+        //tabela(tab);
+        jog_turno(tab);
+        //start = verficador(&start);
 
-    }while(start != 0);
+    }while(1); //start != 0
 
     return 0;
 }

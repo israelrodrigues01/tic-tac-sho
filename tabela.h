@@ -28,7 +28,7 @@ col_alf(int n){
         printf("H  ");
     break;
     case 9:
-        printf("I  ");
+        printf("I");
     break;
 
     }
@@ -39,6 +39,9 @@ jog_alf(int n){
 
     switch(n){
 
+    case 0:
+        printf("[ ]");
+    break;
     case 1:
         printf("[");
         SetConsoleTextAttribute(12, 3);
@@ -53,74 +56,59 @@ jog_alf(int n){
         SetConsoleTextAttribute(12, 6);
         printf("]");
     break;
+    case 3:
+        SetConsoleTextAttribute(12, 10);
+        printf("[x]");
+        SetConsoleTextAttribute(12, 6);
+
+    break;
+    case 4:
+        SetConsoleTextAttribute(12, 10);
+        printf("[o]");
+        SetConsoleTextAttribute(12, 6);
+    break;
+    case 5:
+        SetConsoleTextAttribute(12, 10);
+        printf("[ ]");
+        SetConsoleTextAttribute(12, 6);
+    break;
+
 
     }
 
 }
 
-int pos_init_jog1(int v[9][9]){
+void jog_pos_init(int v[9][9]){
 
     int i, x, y, c, l, verf;
 
     for(i=0; i<5; i++){
-        x = (rand() % 9);
-        y = (rand() % 9);
 
         do{
-            for(l = 0; l < 9; l++){
-                for(c = 0; c < 9; c++){
-                    if(v[x][y] == v[l][c] && v[l][c] != 0){
-                        x = (rand() % 9);
-                        y = (rand() % 9);
-                        verf = 1;
-                    } else {
-                        verf = 0;
-                    }
-                }
-            }
-        }while(verf == 1);
+            x = (rand() % 9);
+            y = (rand() % 9);
+        }while(v[x][y] != 0);
 
         v[x][y] = 1;
 
     }
 
-    return v[x][y];
-
-}
-
-int pos_init_jog2(int v[9][9]){
-
-    int i, x, y, c, l, verf;
-
     for(i=0; i<5; i++){
-        x = rand() % 9;
-        y = rand() % 9;
 
         do{
-            for(l = 0; l < 9; l++){
-                for(c = 0; c < 9; c++){
-                    if(v[x][y] == v[l][c] && v[l][c] != 0){
-                        x = (rand() % 9);
-                        y = (rand() % 9);
-                        verf = 1;
-                    } else {
-                        verf = 0;
-                    }
-                }
-            }
-        }while(verf == 1);
+            x = (rand() % 9);
+            y = (rand() % 9);
+        }while(v[x][y] != 0);
 
         v[x][y] = 2;
 
     }
 
-    return v[x][y];
-
 }
 
 void tabela(int v[9][9]){
 
-    int i, j, co, init = 0;
+    int i, j, co;
 
     printf("\t\t\t\t\t     ");
 
@@ -130,14 +118,11 @@ void tabela(int v[9][9]){
 
     printf("\n");
 
-    init = 1;
-
-
     for(i = 0; i < 9; i++){
         printf("\t\t\t\t\t  %d ", i + 1);
         for(j = 0; j < 9; j++){
-            if(v[i][j] == 0) printf("[ ]", v[i][j]);
-            else jog_alf(v[i][j]);
+            jog_alf(v[i][j]);
+
         }
         printf("\n");
     }
