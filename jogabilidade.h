@@ -51,7 +51,8 @@ int jog_posivel(int v[9][9], int i, int j, int a_lin, int a_col){
 
 }
 
-void rouba_peca(int v[9][9], int a_lin, int a_col, int lin, int col, int p_adv){
+// Estou recebendo a o vetor, posi√ß√µes das pe√ßas e posi√ß√µes de caminho e pe√ßa adivers√°ria;
+void rouba_peca(int v[9][9], int a_lin, int a_col, int lin, int col, int m_peca, int p_adv){
 
     int i, c, min_l = a_lin, max_l = lin, min_c = a_col, max_c = col;
 
@@ -65,59 +66,57 @@ void rouba_peca(int v[9][9], int a_lin, int a_col, int lin, int col, int p_adv){
         max_c = a_col;
     }
 
+    // Verificar nas linhas
+
     if(a_col == col){
-
-        for(i = min_l; i < max_l; i++){
-
-            if(v[i][col] == p_adv)
-                if(p_adv - 1 == 1) v[i][col] = p_adv - 1;
-                else v[i][col] = p_adv + 1;
-
-        }
-
-    } else if(a_lin == lin){
-
-        for(i = min_c; i < max_c; i++){
-
-            if(v[lin][i] == p_adv)
-                if(p_adv - 1 == 1) v[lin][i] = p_adv - 1;
-                else v[lin][i] = p_adv + 1;
-
-        }
-    } else if(a_lin + a_col == lin + col){
-
-        for(i = min_c + 1; i < max_c; i++){
-            //printf("v[%d][%d] = %d -> %d\n", max_l + 2 - i, i, v[max_l + 2 - i][i], p_adv);
-            if(v[max_l + 2 - i][i] == p_adv)
-                if(p_adv - 1 == 1) v[max_l + 2 - i][i] = p_adv - 1;
-                else v[max_l + 2 - i][i] = p_adv + 1;
-                //printf("entrei!!!\n"); - 92
-
-
-        }
-
-
-    } else if(a_lin - a_col == lin - col){
-        //printf("min_l = %d\nmin_c = %d\nmax_l = %d\nmax_col = %d\n", min_l, min_c, max_l, max_c);
-        c = -1;
-        for(i = min_l; i < max_l; i++){
-
-        c++;
-
-            //printf("v[%d][%d] = %d -> %d\n", i, min_c + c, v[i][min_c + c], p_adv);
-            if(v[i][min_c + c] == p_adv){
-                printf("entrei!!!\n");
-                if(p_adv - 1 == 1) v[i][min_c + c] = p_adv - 1;
-                else v[i][min_c + c] = p_adv + 1;
+        for(i = min_l + 1; i < max_l; i++){
+            if(v[i][col] == p_adv){
+                v[i][col] = m_peca;
+            }else if(v[i][col] == m_peca){
+                v[i][col] = p_adv;
             }
-
-
         }
-
     }
 
-    //system("pause");
+    // Verificar nas colunas
 
+    else if(a_lin == lin){
+        for(i = min_c + 1; i < max_c; i++){
+            if(v[lin][i] == p_adv){
+                v[lin][i] = m_peca;
+            }else if(v[lin][i] == m_peca){
+                v[lin][i] = p_adv;
+            }
+        }
+    }
+
+    // Verificar nas diagonais principais
+
+    else if(a_lin - a_col == lin - col){
+        for(i = min_c + 1; i < max_c; i++){
+            if(v[i][i] == p_adv){
+                v[i][i] = m_peca;
+            }else if(v[i][i] == m_peca){
+                v[i][i] = p_adv;
+            }
+        }
+    }
+
+    // Verificar nas diagonais secundarias
+
+    else if(a_lin + a_col == lin + col){
+        for(
+            i = min_l+1, c = max_c-1;
+            i < max_l, c > min_c;
+            i++, c--
+        ){
+            if(v[i][c] == p_adv){
+                v[i][c] = m_peca;
+            }else if(v[i][c] == m_peca){
+                v[i][c] = p_adv;
+            }
+        }
+    }
 }
 
 void jog_turno(int v[9][9]){
@@ -129,12 +128,12 @@ void jog_turno(int v[9][9]){
 
         tabela(v);
 
-        // SeleÁ„o de peÁa 1∞ jogador
+        // SeleÔøΩÔøΩo de peÔøΩa 1ÔøΩ jogador
 
         SetConsoleTextAttribute(12, 3);
-        printf("\n  \t\t\t\t\t\t >> 1∞ Jogador <<\n");
+        printf("\n  \t\t\t\t\t\t >> 1ÔøΩ Jogador <<\n");
         SetConsoleTextAttribute(12, 2);
-        printf("-Escolha uma peÁa: \n\n");
+        printf("-Escolha uma peÔøΩa: \n\n");
         SetConsoleTextAttribute(12, 7);
 
         printf("Linha(1-9): ");
@@ -149,7 +148,7 @@ void jog_turno(int v[9][9]){
 
         if(v[lin][col] != 1){
             SetConsoleTextAttribute(12, 4);
-            printf("\nEssa peÁa n„o est· disponivel!!Escolha outra.\n\n");
+            printf("\nEssa peÔøΩa nÔøΩo estÔøΩ disponivel!!Escolha outra.\n\n");
             SetConsoleTextAttribute(12, 7);
             system("pause");
         }
@@ -158,8 +157,9 @@ void jog_turno(int v[9][9]){
 
     } while(v[lin][col] != 1);
 
-    // Jogada do 1∞ jogador
+    // Jogada do 1ÔøΩ jogador
 
+    // Se a linha e a coluna forem do jogador:
     a_lin = lin;
     a_col = col;
 
@@ -170,10 +170,10 @@ void jog_turno(int v[9][9]){
     do{
         v[a_lin][a_col] = 3;
         tabela(v);
-        v[a_lin][a_col] = 1;
+        v[a_lin][a_col] = 6;
 
         SetConsoleTextAttribute(12, 2);
-        printf("-Mova a peÁa: \n\n");
+        printf("-Mova a peÔøΩa: \n\n");
         SetConsoleTextAttribute(12, 7);
 
         printf("Linha(1-9): ");
@@ -188,7 +188,7 @@ void jog_turno(int v[9][9]){
 
         if(v[lin][col] != 5){
             SetConsoleTextAttribute(12, 4);
-            printf("\nEssa peÁa n„o est· disponivel!!Escolha outra.\n\n");
+            printf("\nEssa peÔøΩa nÔøΩo estÔøΩ disponivel!!Escolha outra.\n\n");
             SetConsoleTextAttribute(12, 7);
             system("pause");
             system("cls");
@@ -198,7 +198,10 @@ void jog_turno(int v[9][9]){
 
     v[lin][col] = 1;
 
-    rouba_peca(v, a_lin, a_col, lin, col, 2);
+    // Ireir passar o vetor, depois a linha atual e coluna, depois as posiveis linha e coluna.
+    // E adicionei a minha pe√ßa e a pe√ßa do adversario
+
+    rouba_peca(v, a_lin, a_col, lin, col, 6, 7);
 
     for(i = 0; i < 9; i++)
         for(j = 0; j < 9; j++)
@@ -209,12 +212,12 @@ void jog_turno(int v[9][9]){
     do{
         tabela(v);
 
-        // SeleÁ„o de peÁa 2∞ jogador
+        // SeleÔøΩÔøΩo de peÔøΩa 2ÔøΩ jogador
 
         SetConsoleTextAttribute(12, 4);
-        printf("\n  \t\t\t\t\t\t >> 2∞ Jogador <<\n");
+        printf("\n  \t\t\t\t\t\t >> 2ÔøΩ Jogador <<\n");
         SetConsoleTextAttribute(12, 2);
-        printf("-Escolha uma peÁa: \n\n");
+        printf("-Escolha uma peÔøΩa: \n\n");
         SetConsoleTextAttribute(12, 7);
 
         printf("Linha(1-9): ");
@@ -229,7 +232,7 @@ void jog_turno(int v[9][9]){
 
         if(v[lin][col] != 2){
             SetConsoleTextAttribute(12, 4);
-            printf("\nEssa peÁa n„o est· disponivel!!Escolha outra.\n\n");
+            printf("\n\a\7Essa peÔøΩa nÔøΩo estÔøΩ disponivel!!Escolha outra.\n\n");
             SetConsoleTextAttribute(12, 7);
             system("pause");
         }
@@ -238,7 +241,7 @@ void jog_turno(int v[9][9]){
 
     }while(v[lin][col] != 2);
 
-    // Jogada do 2∞ jogador
+    // Jogada do 2ÔøΩ jogador
 
     a_lin = lin;
     a_col = col;
@@ -250,10 +253,10 @@ void jog_turno(int v[9][9]){
     do{
         v[a_lin][a_col] = 4;
         tabela(v);
-        v[a_lin][a_col] = 2;
+        v[a_lin][a_col] = 7;
 
         SetConsoleTextAttribute(12, 2);
-        printf("-Mova a peÁa: \n\n");
+        printf("-Mova a peÔøΩa: \n\n");
         SetConsoleTextAttribute(12, 7);
 
         printf("Linha(1-9): ");
@@ -268,7 +271,7 @@ void jog_turno(int v[9][9]){
 
         if(v[lin][col] != 5){
             SetConsoleTextAttribute(12, 4);
-            printf("\nEssa peÁa n„o est· disponivel!!Escolha outra.\n\n");
+            printf("\n\a\8Essa peÔøΩa nÔøΩo estÔøΩ disponivel!!Escolha outra.\n\n");
             SetConsoleTextAttribute(12, 7);
             system("pause");
             system("cls");
@@ -278,7 +281,10 @@ void jog_turno(int v[9][9]){
 
     v[lin][col] = 2;
 
-    rouba_peca(v, a_lin, a_col, lin, col, 1);
+    // Ireir passar o vetor, depois a linha atual e coluna, depois as posiveis linha e coluna, e a pe√ßa na qual devo roupa,
+    //no caso 6 - que s√£o os "coc√¥s" do adv.
+
+    rouba_peca(v, a_lin, a_col, lin, col, 7, 6);
 
     for(i = 0; i < 9; i++)
         for(j = 0; j < 9; j++)
@@ -294,7 +300,7 @@ int verficador(int *start){
     printf(
                "\n\n\n"
                "Jogo finalizado!!! Deseja jogar novamente?\n"
-               "0 - N„o\n"
+               "0 - NÔøΩo\n"
                "1 - Sim\n"
                ">>> "
                );

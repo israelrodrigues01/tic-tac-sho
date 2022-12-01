@@ -39,9 +39,11 @@ jog_alf(int n){
 
     switch(n){
 
+    // Exibir peças vazinhas
     case 0:
         printf("[ ]");
     break;
+    // Exibir peça jogador 1
     case 1:
         printf("[");
         SetConsoleTextAttribute(12, 3);
@@ -49,6 +51,7 @@ jog_alf(int n){
         SetConsoleTextAttribute(12, 6);
         printf("]");
     break;
+    // Exibir peça jogador 2
     case 2:
         printf("[");
         SetConsoleTextAttribute(12, 4);
@@ -56,24 +59,41 @@ jog_alf(int n){
         SetConsoleTextAttribute(12, 6);
         printf("]");
     break;
+    // Selecionado peça
     case 3:
         SetConsoleTextAttribute(12, 10);
-        printf("[x]");
+        printf("[\a\7x]");
         SetConsoleTextAttribute(12, 6);
 
     break;
+    // Selecionado peça
     case 4:
         SetConsoleTextAttribute(12, 10);
-        printf("[o]");
+        printf("[\a\7o]");
         SetConsoleTextAttribute(12, 6);
     break;
+    // Possivel caminho
     case 5:
         SetConsoleTextAttribute(12, 10);
         printf("[ ]");
         SetConsoleTextAttribute(12, 6);
     break;
-
-
+    // Peça deixada após o movimento do jogador 1
+    case 6:
+        printf("[");
+        SetConsoleTextAttribute(12, 3);
+        printf("\a\7a");
+        SetConsoleTextAttribute(12, 6);
+        printf("]");
+    break;
+    // Peça deixada após o movimento do jogador 2
+    case 7:
+        printf("[");
+        SetConsoleTextAttribute(12, 4);
+        printf("\a\7a");
+        SetConsoleTextAttribute(12, 6);
+        printf("]");
+    break;
     }
 
 }

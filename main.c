@@ -16,16 +16,10 @@ int main(){
             for(j = 0; j < 9; j++)
                 tab[i][j] = 0;
 
-    //tab[8][7] = 1;
-    //tab[5][4] = 2;
-
     jog_pos_init(tab);
 
     do{
-
-        //tabela(tab);
         jog_turno(tab);
-        //start = verficador(&start);
 
     }while(1); //start != 0
 
