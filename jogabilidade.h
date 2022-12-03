@@ -37,7 +37,12 @@ int col_num(char coluna){
 
 }
 
-int jog_posivel(int v[9][9], int i, int j, int a_lin, int a_col){
+int validaPeca(int v[9][9], int lin, int col, int m_peca){
+    if(v[lin][col] != m_peca) return 1;
+    else return 0;
+}
+
+int validaMovimento(int v[9][9], int i, int j, int a_lin, int a_col){
 
     if(j == a_col || i == a_lin  || a_lin - a_col == i - j || a_lin + a_col == i + j){
         if(v[i][j] != v[a_lin][a_col] && v[i][j] == 0){
@@ -52,7 +57,7 @@ int jog_posivel(int v[9][9], int i, int j, int a_lin, int a_col){
 }
 
 // Estou recebendo a o vetor, posições das peças e posições de caminho e peça adiversária;
-void rouba_peca(int v[9][9], int a_lin, int a_col, int lin, int col, int m_peca, int p_adv){
+void verificaConversao(int v[9][9], int a_lin, int a_col, int lin, int col, int m_peca, int p_adv){
 
     int i, c, min_l = a_lin, max_l = lin, min_c = a_col, max_c = col;
 
@@ -119,14 +124,14 @@ void rouba_peca(int v[9][9], int a_lin, int a_col, int lin, int col, int m_peca,
     }
 }
 
-void jog_turno(int v[9][9]){
+void naCasa(int v[9][9]){
 
     int l, lin, col, a_lin, a_col, i, j;
     char c[5];
 
     do{
 
-        tabela(v);
+        exibeTabuleiro(v);
 
         // Sele��o de pe�a 1� jogador
 
@@ -146,16 +151,16 @@ void jog_turno(int v[9][9]){
 
         col = col_num(c[0]);
 
-        if(v[lin][col] != 1){
+        if(validaPeca(v, lin, col, 1)){
             SetConsoleTextAttribute(12, 4);
-            printf("\nEssa pe�a n�o est� disponivel!!Escolha outra.\n\n");
+            printf("\n\a\7Essa pe�a n�o est� disponivel!!Escolha outra.\n\n");
             SetConsoleTextAttribute(12, 7);
             system("pause");
         }
 
         system("cls");
 
-    } while(v[lin][col] != 1);
+    } while(validaPeca(v, lin, col, 1));
 
     // Jogada do 1� jogador
 
@@ -165,13 +170,15 @@ void jog_turno(int v[9][9]){
 
     for(i = 0; i < 9; i++)
         for(j = 0; j < 9; j++)
-            if(jog_posivel(v, i, j, a_lin, a_col)) v[i][j] = 5;
+            if(validaMovimento(v, i, j, a_lin, a_col)) v[i][j] = 5;
 
     do{
         v[a_lin][a_col] = 3;
-        tabela(v);
+        exibeTabuleiro(v);
         v[a_lin][a_col] = 6;
 
+        SetConsoleTextAttribute(12, 3);
+        printf("\n  \t\t\t\t\t\t >> 1� Jogador <<\n");
         SetConsoleTextAttribute(12, 2);
         printf("-Mova a pe�a: \n\n");
         SetConsoleTextAttribute(12, 7);
@@ -186,22 +193,22 @@ void jog_turno(int v[9][9]){
 
         col = col_num(c[0]);
 
-        if(v[lin][col] != 5){
+        if(validaPeca(v, lin, col, 5)){
             SetConsoleTextAttribute(12, 4);
-            printf("\nEssa pe�a n�o est� disponivel!!Escolha outra.\n\n");
+            printf("\n\a\7Essa pe�a n�o est� disponivel!!Escolha outra.\n\n");
             SetConsoleTextAttribute(12, 7);
             system("pause");
             system("cls");
         }
 
-    }while(v[lin][col] != 5);
+    }while(validaPeca(v, lin, col, 5));
 
     v[lin][col] = 1;
 
     // Ireir passar o vetor, depois a linha atual e coluna, depois as posiveis linha e coluna.
     // E adicionei a minha peça e a peça do adversario
 
-    rouba_peca(v, a_lin, a_col, lin, col, 6, 7);
+    verificaConversao(v, a_lin, a_col, lin, col, 6, 7);
 
     for(i = 0; i < 9; i++)
         for(j = 0; j < 9; j++)
@@ -210,7 +217,7 @@ void jog_turno(int v[9][9]){
     system("cls");
 
     do{
-        tabela(v);
+        exibeTabuleiro(v);
 
         // Sele��o de pe�a 2� jogador
 
@@ -230,7 +237,7 @@ void jog_turno(int v[9][9]){
 
         col = col_num(c[0]);
 
-        if(v[lin][col] != 2){
+        if(validaPeca(v, lin, col, 2)){
             SetConsoleTextAttribute(12, 4);
             printf("\n\a\7Essa pe�a n�o est� disponivel!!Escolha outra.\n\n");
             SetConsoleTextAttribute(12, 7);
@@ -239,7 +246,7 @@ void jog_turno(int v[9][9]){
 
         system("cls");
 
-    }while(v[lin][col] != 2);
+    }while(validaPeca(v, lin, col, 2));
 
     // Jogada do 2� jogador
 
@@ -248,13 +255,15 @@ void jog_turno(int v[9][9]){
 
     for(i = 0; i < 9; i++)
         for(j = 0; j < 9; j++)
-            if(jog_posivel(v, i, j, a_lin, a_col)) v[i][j] = 5;
+            if(validaMovimento(v, i, j, a_lin, a_col)) v[i][j] = 5;
 
     do{
         v[a_lin][a_col] = 4;
-        tabela(v);
+        exibeTabuleiro(v);
         v[a_lin][a_col] = 7;
 
+        SetConsoleTextAttribute(12, 4);
+        printf("\n  \t\t\t\t\t\t >> 2� Jogador <<\n");
         SetConsoleTextAttribute(12, 2);
         printf("-Mova a pe�a: \n\n");
         SetConsoleTextAttribute(12, 7);
@@ -269,22 +278,22 @@ void jog_turno(int v[9][9]){
 
         col = col_num(c[0]);
 
-        if(v[lin][col] != 5){
+        if(validaPeca(v, lin, col, 5)){
             SetConsoleTextAttribute(12, 4);
-            printf("\n\a\8Essa pe�a n�o est� disponivel!!Escolha outra.\n\n");
+            printf("\n\a\7Essa pe�a n�o est� disponivel!!Escolha outra.\n\n");
             SetConsoleTextAttribute(12, 7);
             system("pause");
             system("cls");
         }
 
-    }while(v[lin][col] != 5);
+    }while(validaPeca(v, lin, col, 5));
 
     v[lin][col] = 2;
 
     // Ireir passar o vetor, depois a linha atual e coluna, depois as posiveis linha e coluna, e a peça na qual devo roupa,
     //no caso 6 - que são os "cocôs" do adv.
 
-    rouba_peca(v, a_lin, a_col, lin, col, 7, 6);
+    verificaConversao(v, a_lin, a_col, lin, col, 7, 6);
 
     for(i = 0; i < 9; i++)
         for(j = 0; j < 9; j++)
@@ -295,7 +304,7 @@ void jog_turno(int v[9][9]){
 }
 
 
-int verficador(int *start){
+int vitoria(int *start){
 
     printf(
                "\n\n\n"

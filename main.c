@@ -10,18 +10,18 @@ int main(){
 
     srand(time(0));
 
-    int tab[9][9], i, j, start = 0;
+    int tabuleiro[9][9], i, j, start = 0;
 
     for(i = 0; i < 9; i++)
             for(j = 0; j < 9; j++)
-                tab[i][j] = 0;
+                tabuleiro[i][j] = 0;
 
-    jog_pos_init(tab);
+    posicao_aleatoria(tabuleiro);
 
     do{
-        jog_turno(tab);
+        naCasa(tabuleiro);
 
-    }while(1); //start != 0
+    }while(1); //vitoria != 0
 
     return 0;
 }

@@ -82,7 +82,7 @@ jog_alf(int n){
     case 6:
         printf("[");
         SetConsoleTextAttribute(12, 3);
-        printf("\a\7a");
+        printf("\a\7\4");
         SetConsoleTextAttribute(12, 6);
         printf("]");
     break;
@@ -90,7 +90,7 @@ jog_alf(int n){
     case 7:
         printf("[");
         SetConsoleTextAttribute(12, 4);
-        printf("\a\7a");
+        printf("\a\7\4");
         SetConsoleTextAttribute(12, 6);
         printf("]");
     break;
@@ -98,7 +98,7 @@ jog_alf(int n){
 
 }
 
-void jog_pos_init(int v[9][9]){
+void posicao_aleatoria(int v[9][9]){
 
     int i, x, y, c, l, verf;
 
@@ -126,7 +126,7 @@ void jog_pos_init(int v[9][9]){
 
 }
 
-void tabela(int v[9][9]){
+void exibeTabuleiro(int v[9][9]){
 
     int i, j, co;
 
