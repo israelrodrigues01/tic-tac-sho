@@ -95,7 +95,6 @@ jog_alf(int n){
         printf("]");
     break;
     }
-
 }
 
 void posicao_aleatoria(int v[9][9]){
