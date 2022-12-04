@@ -42,17 +42,105 @@ int validaPeca(int v[9][9], int lin, int col, int m_peca){
     else return 0;
 }
 
-int validaMovimento(int v[9][9], int i, int j, int a_lin, int a_col){
+int validaMovimento(int v[9][9], int a_lin, int a_col){
 
-    if(j == a_col || i == a_lin  || a_lin - a_col == i - j || a_lin + a_col == i + j){
-        if(v[i][j] != v[a_lin][a_col] && v[i][j] == 0){
-            return 1;
-        } else {
-            return 0;
+    int i, j, val_l[2], val_c[2], cont[2], val_dp[2], val_ds[2];
+
+    for(i = 0; i < 2; i++) cont[i] = 0;
+    val_l[0] = 0;
+    val_l[1] = 8;
+    val_c[0] = 0;
+    val_c[1] = 8;
+
+    for(i = 0; i < 9; i++){
+
+        if(v[i][a_col] == 1 || v[i][a_col] == 2){
+
+            if(i < a_lin) val_l[0] = i;
+            if(i > a_lin && cont[0] == 0){
+                cont[0]++;
+                val_l[1] = i;
+            }
+
         }
-    } else{
-        return 0;
+
+        if(v[a_lin][i] == 1 || v[a_lin][i] == 2){
+
+            if(i < a_col) val_c[0] = i;
+            if(i > a_col && cont[1] == 0){
+                cont[1]++;
+                val_c[1] = i;
+            }
+
+        }
+
     }
+
+    for(i = 0; i < 2; i++) cont[i] = 0;
+
+    if(a_lin + a_col >= 8){
+        val_dp[0] = a_lin + a_col - 8;
+        val_dp[1] = 8;
+    } else {
+        val_dp[0] = 0;
+        val_dp[1] = a_lin + a_col;
+
+    }
+
+    if(a_lin - a_col <= 0){
+        val_ds[0] = 0;
+        val_ds[1] = 8 - (a_col - a_lin);
+    } else {
+        val_ds[0] = a_lin - a_col;
+        val_ds[1] = 8;
+
+    }
+
+    for(i = 0; i < 9; i++)
+        for(j = 0; j < 9; j++){
+
+            if(i + j == a_lin + a_col)
+                if(v[i][j] == 1 || v[i][j] == 2){
+
+                    if(i < a_lin) val_dp[0] = i;
+                    if(i > a_lin && cont[0] == 0){
+                        cont[0]++;
+                        val_dp[1] = i;
+                    }
+
+                }
+
+            if(i - j == a_lin - a_col)
+                if(v[i][j] == 1 || v[i][j] == 2){
+
+                    if(i < a_lin) val_ds[0] = i;
+                    if(i > a_lin && cont[1] == 0){
+                        cont[1]++;
+                        val_ds[1] = i;
+                    }
+
+                }
+        }
+
+    for(i = 0; i < 9; i++)
+        for(j = 0; j < 9; j++){
+
+            if(j == a_col || i == a_lin  || a_lin - a_col == i - j || a_lin + a_col == i + j){
+                if(v[i][j] != v[a_lin][a_col] && v[i][j] == 0){
+                    if(j == a_col && i >= val_l[0] && i <= val_l[1])
+                        v[i][j] = 5;
+                    if(i == a_lin && j >= val_c[0] && j <= val_c[1])
+                        v[i][j] = 5;
+                    if(i + j == a_lin + a_col && i >= val_dp[0] && i <= val_dp[1])
+                        v[i][j] = 5;
+                    if(i - j == a_lin - a_col && i >= val_ds[0] && i <= val_ds[1])
+                        v[i][j] = 5;
+                }
+            }
+
+        }
+
+    return v[i][j];
 
 }
 
@@ -136,9 +224,9 @@ void naCasa(int v[9][9]){
         // Sele��o de pe�a 1� jogador
 
         SetConsoleTextAttribute(12, 3);
-        printf("\n  \t\t\t\t\t\t >> 1� Jogador <<\n");
+        printf("\n  \t\t\t\t\t\t >> 1º Jogador <<\n");
         SetConsoleTextAttribute(12, 2);
-        printf("-Escolha uma pe�a: \n\n");
+        printf("-Escolha uma peça: \n\n");
         SetConsoleTextAttribute(12, 7);
 
         printf("Linha(1-9): ");
@@ -153,7 +241,7 @@ void naCasa(int v[9][9]){
 
         if(validaPeca(v, lin, col, 1)){
             SetConsoleTextAttribute(12, 4);
-            printf("\n\a\7Essa pe�a n�o est� disponivel!!Escolha outra.\n\n");
+            printf("\n\a\7Essa peça não está disponivel!! Escolha outra.\n\n");
             SetConsoleTextAttribute(12, 7);
             system("pause");
         }
@@ -168,9 +256,11 @@ void naCasa(int v[9][9]){
     a_lin = lin;
     a_col = col;
 
-    for(i = 0; i < 9; i++)
+    /*for(i = 0; i < 9; i++)
         for(j = 0; j < 9; j++)
-            if(validaMovimento(v, i, j, a_lin, a_col)) v[i][j] = 5;
+            if(validaMovimento(v, i, j, a_lin, a_col)) v[i][j] = 5;*/
+
+    validaMovimento(v, a_lin, a_col);
 
     do{
         v[a_lin][a_col] = 3;
@@ -178,9 +268,9 @@ void naCasa(int v[9][9]){
         v[a_lin][a_col] = 6;
 
         SetConsoleTextAttribute(12, 3);
-        printf("\n  \t\t\t\t\t\t >> 1� Jogador <<\n");
+        printf("\n  \t\t\t\t\t\t >> 1º Jogador <<\n");
         SetConsoleTextAttribute(12, 2);
-        printf("-Mova a pe�a: \n\n");
+        printf("-Mova a peça: \n\n");
         SetConsoleTextAttribute(12, 7);
 
         printf("Linha(1-9): ");
@@ -195,7 +285,7 @@ void naCasa(int v[9][9]){
 
         if(validaPeca(v, lin, col, 5)){
             SetConsoleTextAttribute(12, 4);
-            printf("\n\a\7Essa pe�a n�o est� disponivel!!Escolha outra.\n\n");
+            printf("\n\a\7Essa peça não está disponivel!! Escolha outra.\n\n");
             SetConsoleTextAttribute(12, 7);
             system("pause");
             system("cls");
@@ -222,9 +312,9 @@ void naCasa(int v[9][9]){
         // Sele��o de pe�a 2� jogador
 
         SetConsoleTextAttribute(12, 4);
-        printf("\n  \t\t\t\t\t\t >> 2� Jogador <<\n");
+        printf("\n  \t\t\t\t\t\t >> 2º Jogador <<\n");
         SetConsoleTextAttribute(12, 2);
-        printf("-Escolha uma pe�a: \n\n");
+        printf("-Escolha uma peça: \n\n");
         SetConsoleTextAttribute(12, 7);
 
         printf("Linha(1-9): ");
@@ -239,7 +329,7 @@ void naCasa(int v[9][9]){
 
         if(validaPeca(v, lin, col, 2)){
             SetConsoleTextAttribute(12, 4);
-            printf("\n\a\7Essa pe�a n�o est� disponivel!!Escolha outra.\n\n");
+            printf("\n\a\7Essa peça não está disponivel!! Escolha outra.\n\n");
             SetConsoleTextAttribute(12, 7);
             system("pause");
         }
@@ -253,9 +343,11 @@ void naCasa(int v[9][9]){
     a_lin = lin;
     a_col = col;
 
-    for(i = 0; i < 9; i++)
+    /*for(i = 0; i < 9; i++)
         for(j = 0; j < 9; j++)
-            if(validaMovimento(v, i, j, a_lin, a_col)) v[i][j] = 5;
+            if(validaMovimento(v, i, j, a_lin, a_col)) v[i][j] = 5;*/
+
+    validaMovimento(v, a_lin, a_col);
 
     do{
         v[a_lin][a_col] = 4;
@@ -263,9 +355,9 @@ void naCasa(int v[9][9]){
         v[a_lin][a_col] = 7;
 
         SetConsoleTextAttribute(12, 4);
-        printf("\n  \t\t\t\t\t\t >> 2� Jogador <<\n");
+        printf("\n  \t\t\t\t\t\t >> 2º Jogador <<\n");
         SetConsoleTextAttribute(12, 2);
-        printf("-Mova a pe�a: \n\n");
+        printf("-Mova a peça: \n\n");
         SetConsoleTextAttribute(12, 7);
 
         printf("Linha(1-9): ");
@@ -280,7 +372,7 @@ void naCasa(int v[9][9]){
 
         if(validaPeca(v, lin, col, 5)){
             SetConsoleTextAttribute(12, 4);
-            printf("\n\a\7Essa pe�a n�o est� disponivel!!Escolha outra.\n\n");
+            printf("\n\a\7Essa peça não está disponivel!! Escolha outra.\n\n");
             SetConsoleTextAttribute(12, 7);
             system("pause");
             system("cls");
@@ -309,7 +401,7 @@ int vitoria(int *start){
     printf(
                "\n\n\n"
                "Jogo finalizado!!! Deseja jogar novamente?\n"
-               "0 - N�o\n"
+               "0 - Não\n"
                "1 - Sim\n"
                ">>> "
                );

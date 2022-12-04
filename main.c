@@ -1,8 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <windows.h>
 #include <locale.h>
-#include "tabela.h"
-#include "jogabilidade.h"
+#include "tabela.h";
+#include "jogabilidade.h";
 
 int main(){
 
