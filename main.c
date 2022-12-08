@@ -11,7 +11,7 @@ int main(){
 
     srand(time(0));
 
-    int tabuleiro[9][9], i, j, start = 1, teste;
+    int tabuleiro[9][9], i, j, start = 1, verificador;
 
     for(i = 0; i < 9; i++)
             for(j = 0; j < 9; j++)
@@ -20,10 +20,11 @@ int main(){
     posicao_aleatoria(tabuleiro);
 
     do{
-        teste = naCasa(tabuleiro);
+        verificador = naCasa(tabuleiro);
 
-        if(teste){
+        if(verificador){
             printf(
+                "\n\n\n"
                 "Deseja jogar novamente?\n"
                 "0 - Não\n"
                 "1 - Sim\n"
@@ -31,7 +32,7 @@ int main(){
             scanf("%d", &start);
         }
 
-    }while(start != 0); //vitoria != 0
+    }while(start != 0);
 
     return 0;
 }

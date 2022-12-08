@@ -212,17 +212,19 @@ void verificaConversao(int v[9][9], int a_lin, int a_col, int lin, int col, int 
     }
 }
 
-int verificaVitoria(int v[9][9], int m_peca, int p_adv){
+int vitoria(int v[9][9], int m_peca, int p_adv){
 
     int cont_m = 0, cont_adv = 0, i, j, m, t;
 
-    // Linha
+    // Coluna
     for(i = 0; i < 9; i++){
         for(j = 0; j < 9; j++){
                 if(v[i][j] == m_peca){
                     cont_m++;
                     if(cont_m == 2){
+                        SetConsoleTextAttribute(12, 3);
                         printf("Jogador 1 GANHOU!");
+                        SetConsoleTextAttribute(12, 6);
                         return 1;
                     }
                 }else if(v[i][j] == p_adv){
@@ -241,131 +243,85 @@ int verificaVitoria(int v[9][9], int m_peca, int p_adv){
     cont_m = 0;
     cont_adv = 0;
 
+    // Linha
+    for(i = 0; i < 9; i++){
+        for(j = 0; j < 9; j++){
+                if(v[j][i] == m_peca){
+                    cont_m++;
+                    if(cont_m == 2){
+                        printf("Jogador 1 GANHOU!");
+                        return 1;
+                    }
+                }else if(v[j][i] == p_adv){
+                    cont_adv++;
+                    if(cont_adv == 2){
+                        printf("Jogador 2 GANHOU!");
+                        return 1;
+                    }
+                }else{
+                    cont_m = 0;
+                    cont_adv = 0;
+                }
+        }
+    }
+
+    cont_m = 0;
+    cont_adv = 0;
+    
+    for(i = 0; i < 9; i++){
+        for(j = 0; j < 9; j++){
+
+             for(m = 0; m < 9; m++){
+                for(t = 0; t < 9; t++){
+
+                    // Diagonal principal
+                    if(i - j == m - t){
+                        if(v[m][t] == m_peca){
+                            cont_m++;
+                            if(cont_m == 2){
+                                printf("Jogador 1 GANHOU!");
+                                return 1;
+                            }
+                        }else if(v[m][t] == p_adv){
+                            cont_adv++;
+                            if(cont_adv == 2){
+                                printf("Jogador 2 GANHOU!");
+                                return 1;
+                            }
+                        }else{
+                            cont_m = 0;
+                            cont_adv = 0;
+                        }
+                    }
+                    
+                    // Diagonal secundária
+                    else if(i + j == m + t){
+                        if(v[m][t] == m_peca){
+                            cont_m++;
+                            if(cont_m == 2){
+                                printf("Jogador 1 GANHOU!");
+                                return 1;
+                            }
+                        }else if(v[m][t] == p_adv){
+                            cont_adv++;
+                            if(cont_adv == 2){
+                                printf("Jogador 2 GANHOU!");
+                                return 1;
+                            }
+                        }else{
+                            cont_m = 0;
+                            cont_adv = 0;
+                        }
+                    }                    
+                }
+            }
+        }
+    }
+
+    cont_m = 0;
+    cont_adv = 0;
+
     return 0;
-
-    //peça adversaria
-    // for(i = 0; i < 9; i++){
-    //     for(j = 0; j < 9; j++){
-    //             if(v[i][j] == p_adv){
-    //                 cont_adv++;
-    //                 if(cont_adv == 2){
-    //                     printf("Jogador 2 GANHOU!");
-    //                     vitoria();
-    //                     return 1;
-    //                 }
-    //             } else{
-    //                 cont_adv = 0;
-    //             }
-    //     }
-    // }
-
-
-    // //COLUNA
-    // for(i = 0; i < 9; i++){
-    //     for(j = 0; j < 9; j++){
-    //             if(v[i][j] == m_peca){
-    //                 cont_m++;
-    //                 if(cont_m == 2){
-    //                     printf("Jogador 1 GANHOU!");
-    //                     return 1;
-    //                 }
-    //             } else{
-    //                 cont_m = 0;
-    //             }
-    //     }
-    // }
-
-    // cont_m = 0;
-    // //peça adversária
-    // for(i = 0; i < 9; i++){
-    //     for(j = 0; j < 9; j++){
-    //             if(v[i][j] == p_adv){
-    //                 cont_adv++;
-    //                 if(cont_adv == 2){
-    //                     printf("Jogador 2 GANHOU!");
-    //                     vitoria();
-    //                     return 1;
-    //                 }
-    //             } else{
-    //                 cont_adv = 0;
-    //             }
-    //     }
-    // }
-
-    // cont_m = 0;
-    // //DIAGONAL PRINCIPAL
-
-    // for(i = 0; i < 9; i++){
-    //     for(j = 0; j < 9; j++){
-    //         for(m = 0; m < 9; m++){
-    //             for(t = 0; t < 9; t++){
-
-    //             if(i - j == m - t){
-    //                     if(v[m][t] == m_peca){
-    //                         cont_m++;
-    //                         if(cont_m == 2){
-    //                             printf("Jogador 1 GANHOU!");
-    //                             vitoria();
-    //                             return 1;
-    //                         }
-    //                     } else{
-    //                         cont_m = 0;
-    //                     }
-
-    //                     if(v[m][t] == p_adv){
-    //                         cont_adv++;
-    //                         if(cont_adv == 2){
-    //                             printf("Jogador 2 GANHOU!");
-    //                             vitoria();
-    //                             return 1;
-    //                         }
-    //                     } else{
-    //                         cont_adv = 0;
-    //                     }
-
-    //             }
-
-    //             }
-    //         }
-
-    //     }
-    // }
-
-    // for(i = 9; i >= 0; i--){
-    //     for(j = 9; j >= 0; j--){
-    //         for(m = 9; m >= 0; m--){
-    //             for(t = 9; t >= 0; t--){
-
-    //             if(i - j == m - t){
-    //                     if(v[m][t] == m_peca){
-    //                         cont_m++;
-    //                         if(cont_m == 2){
-    //                             printf("Jogador 1 GANHOU!");
-    //                             vitoria();
-    //                             return 1;
-    //                         }
-    //                     } else{
-    //                         cont_m = 0;
-    //                     }
-
-    //                     if(v[m][t] == p_adv){
-    //                         cont_adv++;
-    //                         if(cont_adv == 2){
-    //                             printf("Jogador 2 GANHOU!");
-    //                             vitoria();
-    //                             return 1;
-    //                         }
-    //                     } else{
-    //                         cont_adv = 0;
-    //                     }
-
-    //             }
-
-    //             }
-    //         }
-
-    //     }
-    // }
 
 }
 
@@ -374,7 +330,7 @@ int naCasa(int v[9][9]){
     // a_lin = Linha atual;
     // a_col = Coluna atual;
 
-    int l, lin, col, a_lin, a_col, i, j, vitoria;
+    int l, lin, col, a_lin, a_col, i, j;
     char c[5]; // Letra da posição da coluna
 
     do{
@@ -460,12 +416,14 @@ int naCasa(int v[9][9]){
     for(i = 0; i < 9; i++)
         for(j = 0; j < 9; j++)
             if(v[i][j] == 5) v[i][j] = 0;
+    
 
-    system("cls");
-
-    if(verificaVitoria(v, 6, 7)){
+    if(vitoria(v, 6, 7)){
         return 1;
     }
+    
+    system("cls");
+
 
     do{
         exibeTabuleiro(v);
@@ -544,16 +502,15 @@ int naCasa(int v[9][9]){
 
     verificaConversao(v, a_lin, a_col, lin, col, 7, 6);
 
+    if(vitoria(v, 6, 7)){
+        return 1;
+    }
+
     for(i = 0; i < 9; i++)
         for(j = 0; j < 9; j++)
             if(v[i][j] == 5) v[i][j] = 0;
 
     system("cls");
-
-
-    if(verificaVitoria(v, 6, 7)){
-        return 1;
-    }
 
     return 0;
 }
