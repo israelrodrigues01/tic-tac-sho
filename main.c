@@ -28,6 +28,7 @@ int main(){
                 "Deseja jogar novamente?\n"
                 "0 - Não\n"
                 "1 - Sim\n"
+                "Selecione: "
                 );
             scanf("%d", &start);
 

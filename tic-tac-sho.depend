@@ -104,3 +104,39 @@
 
 1670505136 c:\users\casa\desktop\projeto-c-final\tic-tac-sho\jogabilidade.h
 
+1670508586 source:c:\users\clay\desktop\test\tic-tac-sho\main.c
+	<stdio.h>
+	<stdlib.h>
+	<windows.h>
+	<locale.h>
+	"tabela.h"
+	"jogabilidade.h"
+
+1670510939 c:\users\clay\desktop\test\tic-tac-sho\tabela.h
+
+1670511015 c:\users\clay\desktop\test\tic-tac-sho\jogabilidade.h
+
+1670527393 source:c:\users\estagiodtigov\downloads\tic-tac\tic-tac-sho\main.c
+	<stdio.h>
+	<stdlib.h>
+	<windows.h>
+	<locale.h>
+	"tabela.h"
+	"jogabilidade.h"
+
+1670536867 c:\users\estagiodtigov\downloads\tic-tac\tic-tac-sho\tabela.h
+
+1670539906 c:\users\estagiodtigov\downloads\tic-tac\tic-tac-sho\jogabilidade.h
+
+1670527393 source:c:\users\casa\desktop\tic-tac-sho\main.c
+	<stdio.h>
+	<stdlib.h>
+	<windows.h>
+	<locale.h>
+	"tabela.h"
+	"jogabilidade.h"
+
+1670541962 c:\users\casa\desktop\tic-tac-sho\tabela.h
+
+1670543448 c:\users\casa\desktop\tic-tac-sho\jogabilidade.h
+
