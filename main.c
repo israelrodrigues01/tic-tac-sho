@@ -30,6 +30,16 @@ int main(){
                 "1 - Sim\n"
                 );
             scanf("%d", &start);
+
+            system("cls");
+
+            for(i = 0; i < 9; i++){
+                for(j = 0; j < 9; j++){
+                    tabuleiro[i][j] = 0;
+                }
+            }
+
+            posicao_aleatoria(tabuleiro);
         }
 
     }while(start != 0);

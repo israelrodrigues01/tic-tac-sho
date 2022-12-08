@@ -44,7 +44,7 @@ int validaPeca(int v[9][9], int lin, int col, int m_peca){
 
 int validaMovimento(int v[9][9], int a_lin, int a_col){
 
-    int i, j, val_l[2], val_c[2], cont[2], val_dp[2], val_ds[2];
+    int i, j, val_l[2], val_c[2], cont[2], val_dp[2], val_ds[2], cont_movimento = 0;
 
     for(i = 0; i < 2; i++) cont[i] = 0;
     val_l[0] = 0;
@@ -127,6 +127,9 @@ int validaMovimento(int v[9][9], int a_lin, int a_col){
 
             if(j == a_col || i == a_lin  || a_lin - a_col == i - j || a_lin + a_col == i + j){
                 if(v[i][j] != v[a_lin][a_col] && v[i][j] == 0){
+                    
+                    cont_movimento++;
+
                     if(j == a_col && i >= val_l[0] && i <= val_l[1])
                         v[i][j] = 5;
                     if(i == a_lin && j >= val_c[0] && j <= val_c[1])
@@ -137,8 +140,11 @@ int validaMovimento(int v[9][9], int a_lin, int a_col){
                         v[i][j] = 5;
                 }
             }
-
         }
+
+    if(cont_movimento == 0){
+        return 1;
+    }
 
     return v[i][j];
 
@@ -441,6 +447,8 @@ int naCasa(int v[9][9]){
     
 
     if(vitoria(v, 6, 7)){
+        printf("\n\n");
+        system("pause");
         return 1;
     }
     
