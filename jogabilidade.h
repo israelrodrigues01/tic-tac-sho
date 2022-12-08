@@ -142,7 +142,7 @@ int validaMovimento(int v[9][9], int a_lin, int a_col){
             }
         }
 
-    if(cont_movimento > 0){
+    if(cont_movimento == 0){
         return 1;
     }
 
@@ -218,34 +218,46 @@ void verificaConversao(int v[9][9], int a_lin, int a_col, int lin, int col, int 
     }
 }
 
-int vitoria(int v[9][9], int m_peca, int p_adv){
+int vitoria(int v[9][9], int p_one, int p_two){
 
     int cont_m = 0, cont_adv = 0, i, j, m, t;
 
     // Coluna
     for(i = 0; i < 9; i++){
         for(j = 0; j < 9; j++){
-                if(v[i][j] == m_peca){
+                if(v[i][j] == p_one){
+                    if(cont_adv < 5) cont_adv = 0;
                     cont_m++;
-                    if(cont_m == 2){
-                        printf("\n\n\n");
-                        SetConsoleTextAttribute(12, 3);
-                        printf("\t\t\t\t\t\t Jogador 1 GANHOU!");
-                        SetConsoleTextAttribute(12, 7);
-                        return 1;
-                    }
-                }else if(v[i][j] == p_adv){
+                }else if(v[i][j] == p_two){
+                    if(cont_m < 5) cont_m = 0;
                     cont_adv++;
-                    if(cont_adv == 2){
-                        printf("\n\n\n");
-                        SetConsoleTextAttribute(12, 3);
-                        printf("\t\t\t\t\t\t Jogador 2 GANHOU!");
-                        SetConsoleTextAttribute(12, 7);
-                        return 1;
-                    }
+                }else if(cont_m == cont_adv && cont_m >= 5){
+                    system("cls");
+                    exibeTabuleiro(v);
+                    printf("\n\n\n");
+                    SetConsoleTextAttribute(12, 6);
+                    printf("\t\t\t\t\t\t   Empate!");
+                    SetConsoleTextAttribute(12, 7);
+                    return 1;
+                }else if(cont_m >= 5 && i == 8 && j == 8){
+                    system("cls");
+                    exibeTabuleiro(v);
+                    printf("\n\n\n");
+                    SetConsoleTextAttribute(12, 3);
+                    printf("\t\t\t\t\t\t Jogador 1 GANHOU!");
+                    SetConsoleTextAttribute(12, 7);
+                    return 1;
+                }else if(cont_adv >= 5){
+                    system("cls");
+                    exibeTabuleiro(v);
+                    printf("\n\n\n");
+                    SetConsoleTextAttribute(12, 4);
+                    printf("\t\t\t\t\t\t Jogador 2 GANHOU!");
+                    SetConsoleTextAttribute(12, 7);
+                    return 1;
                 }else{
-                    cont_m = 0;
-                    cont_adv = 0;
+                    if(cont_m < 5) cont_m = 0;
+                    if(cont_adv < 5) cont_adv = 0;
                 }
         }
     }
@@ -256,28 +268,40 @@ int vitoria(int v[9][9], int m_peca, int p_adv){
     // Linha
     for(i = 0; i < 9; i++){
         for(j = 0; j < 9; j++){
-                if(v[j][i] == m_peca){
-                    cont_m++;
-                    if(cont_m == 2){
-                        printf("\n\n\n");
-                                SetConsoleTextAttribute(12, 3);
-                                printf("\t\t\t\t\t\t Jogador 1 GANHOU!");
-                                SetConsoleTextAttribute(12, 7);
-                        return 1;
-                    }
-                }else if(v[j][i] == p_adv){
-                    cont_adv++;
-                    if(cont_adv == 2){
-                        printf("\n\n\n");
-                                SetConsoleTextAttribute(12, 3);
-                                printf("\t\t\t\t\t\t Jogador 2 GANHOU!");
-                                SetConsoleTextAttribute(12, 7);
-                        return 1;
-                    }
-                }else{
-                    cont_m = 0;
-                    cont_adv = 0;
-                }
+            if(v[j][i] == p_one){
+                if(cont_adv < 5) cont_adv = 0;
+                cont_m++;
+            }else if(v[j][i] == p_two){
+                if(cont_m < 5) cont_m = 0;
+                cont_adv++;
+            }else if(cont_m == cont_adv && cont_m >= 5){
+                system("cls");
+                exibeTabuleiro(v);
+                printf("\n\n\n");
+                SetConsoleTextAttribute(12, 6);
+                printf("\t\t\t\t\t\t   Empate!");
+                SetConsoleTextAttribute(12, 7);
+                return 1;
+            }else if(cont_m >= 5 && i == 8 && j == 8){
+                system("cls");
+                exibeTabuleiro(v);
+                printf("\n\n\n");
+                SetConsoleTextAttribute(12, 3);
+                printf("\t\t\t\t\t\t Jogador 1 GANHOU!");
+                SetConsoleTextAttribute(12, 7);
+                return 1;
+            }else if(cont_adv >= 5){
+                system("cls");
+                exibeTabuleiro(v);
+                printf("\n\n\n");
+                SetConsoleTextAttribute(12, 4);
+                printf("\t\t\t\t\t\t Jogador 2 GANHOU!");
+                SetConsoleTextAttribute(12, 7);
+                return 1;
+            }else{
+                if(cont_m < 5) cont_m = 0;
+                if(cont_adv < 5) cont_adv = 0;
+            }
         }
     }
 
@@ -292,62 +316,83 @@ int vitoria(int v[9][9], int m_peca, int p_adv){
 
                     // Diagonal principal
                     if(i - j == m - t){
-                        if(v[m][t] == m_peca){
+                        if(v[m][t] == p_one){
+                            if(cont_adv < 5) cont_adv = 0;
                             cont_m++;
-                            if(cont_m == 2){
-                                printf("\n\n\n");
-                                SetConsoleTextAttribute(12, 3);
-                                printf("\t\t\t\t\t\t Jogador 1 GANHOU!");
-                                SetConsoleTextAttribute(12, 7);
-                                return 1;
-                            }
-                        }else if(v[m][t] == p_adv){
+                        }else if(v[m][t] == p_two){
+                            if(cont_m < 5) cont_m = 0;
                             cont_adv++;
-                            if(cont_adv == 2){
-                                printf("\n\n\n");
-                                SetConsoleTextAttribute(12, 3);
-                                printf("\t\t\t\t\t\t Jogador 2 GANHOU!");
-                                SetConsoleTextAttribute(12, 7);
-                                return 1;
-                            }
+                        }else if(cont_m == cont_adv && cont_m >= 5){
+                            system("cls");
+                            exibeTabuleiro(v);
+                            printf("\n\n\n");
+                            SetConsoleTextAttribute(12, 6);
+                            printf("\t\t\t\t\t\t   Empate!");
+                            SetConsoleTextAttribute(12, 7);
+                            return 1;
+                        }else if(cont_m >= 5 && i == 8 && j == 8){
+                            system("cls");
+                            exibeTabuleiro(v);
+                            printf("\n\n\n");
+                            SetConsoleTextAttribute(12, 3);
+                            printf("\t\t\t\t\t\t Jogador 1 GANHOU!");
+                            SetConsoleTextAttribute(12, 7);
+                            return 1;
+                        }else if(cont_adv >= 5){
+                            system("cls");
+                            exibeTabuleiro(v);
+                            printf("\n\n\n");
+                            SetConsoleTextAttribute(12, 4);
+                            printf("\t\t\t\t\t\t Jogador 2 GANHOU!");
+                            SetConsoleTextAttribute(12, 7);
+                            return 1;
                         }else{
-                            cont_m = 0;
-                            cont_adv = 0;
+                            if(cont_m < 5) cont_m = 0;
+                            if(cont_adv < 5) cont_adv = 0;
                         }
                     }
 
                     // Diagonal secundária
                     else if(i + j == m + t){
-                        if(v[m][t] == m_peca){
+                        if(v[m][t] == p_one){
+                            if(cont_adv < 5) cont_adv = 0;
                             cont_m++;
-                            if(cont_m == 2){
-                                printf("\n\n\n");
-                                SetConsoleTextAttribute(12, 3);
-                                printf("\t\t\t\t\t\t Jogador 1 GANHOU!");
-                                SetConsoleTextAttribute(12, 7);
-                                return 1;
-                            }
-                        }else if(v[m][t] == p_adv){
+                        }else if(v[m][t] == p_two){
+                            if(cont_m < 5) cont_m = 0;
                             cont_adv++;
-                            if(cont_adv == 2){
-                                printf("\n\n\n");
-                                SetConsoleTextAttribute(12, 3);
-                                printf("\t\t\t\t\t\t Jogador 2 GANHOU!");
-                                SetConsoleTextAttribute(12, 7);
-                                return 1;
-                            }
+                        }else if(cont_m == cont_adv && cont_m >= 5){
+                            system("cls");
+                            exibeTabuleiro(v);
+                            printf("\n\n\n");
+                            SetConsoleTextAttribute(12, 6);
+                            printf("\t\t\t\t\t\t   Empate!");
+                            SetConsoleTextAttribute(12, 7);
+                            return 1;
+                        }else if(cont_m >= 5 && i == 8 && j == 8){
+                            system("cls");
+                            exibeTabuleiro(v);
+                            printf("\n\n\n");
+                            SetConsoleTextAttribute(12, 3);
+                            printf("\t\t\t\t\t\t Jogador 1 GANHOU!");
+                            SetConsoleTextAttribute(12, 7);
+                            return 1;
+                        }else if(cont_adv >= 5){
+                            system("cls");
+                            exibeTabuleiro(v);
+                            printf("\n\n\n");
+                            SetConsoleTextAttribute(12, 4);
+                            printf("\t\t\t\t\t\t Jogador 2 GANHOU!");
+                            SetConsoleTextAttribute(12, 7);
+                            return 1;
                         }else{
-                            cont_m = 0;
-                            cont_adv = 0;
+                            if(cont_m < 5) cont_m = 0;
+                            if(cont_adv < 5) cont_adv = 0;
                         }
                     }
                 }
             }
         }
     }
-
-    cont_m = 0;
-    cont_adv = 0;
 
     return 0;
 
@@ -365,7 +410,7 @@ int naCasa(int v[9][9]){
 
         exibeTabuleiro(v);
 
-        // Sele��o de pe�a 1� jogador
+        // Sele  o de pe a 1  jogador
 
         SetConsoleTextAttribute(12, 3);
         printf("\n  \t\t\t\t\t\t >> 1º Jogador <<\n");
@@ -394,16 +439,11 @@ int naCasa(int v[9][9]){
 
     } while(validaPeca(v, lin, col, 1));
 
-    // Jogada do 1� jogador
+    // Jogada do 1  jogador
 
     // Se a linha e a coluna forem do jogador:
     a_lin = lin;
     a_col = col;
-
-    if(validaMovimento(v, a_lin, a_col) == 1){
-        printf("Jogador 2 VENCEU!!");
-        return 1;
-    }
 
     validaMovimento(v, a_lin, a_col);
 
@@ -452,8 +492,6 @@ int naCasa(int v[9][9]){
 
 
     if(vitoria(v, 6, 7)){
-        printf("\n\n");
-        system("pause");
         return 1;
     }
 
@@ -463,7 +501,7 @@ int naCasa(int v[9][9]){
     do{
         exibeTabuleiro(v);
 
-        // Sele��o de pe�a 2� jogador
+        // Sele  o de pe a 2  jogador
 
         SetConsoleTextAttribute(12, 4);
         printf("\n  \t\t\t\t\t\t >> 2º Jogador <<\n");
@@ -492,15 +530,10 @@ int naCasa(int v[9][9]){
 
     }while(validaPeca(v, lin, col, 2));
 
-    // Jogada do 2� jogador
+    // Jogada do 2  jogador
 
     a_lin = lin;
     a_col = col;
-
-    if(validaMovimento(v, a_lin, a_col) == 1){
-        printf("Jogador 2 VENCEU!!");
-        return 1;
-    }
 
     validaMovimento(v, a_lin, a_col);
 
