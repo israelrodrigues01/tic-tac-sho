@@ -222,15 +222,19 @@ int vitoria(int v[9][9], int m_peca, int p_adv){
                 if(v[i][j] == m_peca){
                     cont_m++;
                     if(cont_m == 2){
+                        printf("\n\n\n");
                         SetConsoleTextAttribute(12, 3);
-                        printf("Jogador 1 GANHOU!");
-                        SetConsoleTextAttribute(12, 6);
+                        printf("\t\t\t\t\t\t Jogador 1 GANHOU!");
+                        SetConsoleTextAttribute(12, 7);
                         return 1;
                     }
                 }else if(v[i][j] == p_adv){
                     cont_adv++;
                     if(cont_adv == 2){
-                        printf("Jogador 2 GANHOU!");
+                        printf("\n\n\n");
+                        SetConsoleTextAttribute(12, 3);
+                        printf("\t\t\t\t\t\t Jogador 2 GANHOU!");
+                        SetConsoleTextAttribute(12, 7);
                         return 1;
                     }
                 }else{
@@ -249,13 +253,19 @@ int vitoria(int v[9][9], int m_peca, int p_adv){
                 if(v[j][i] == m_peca){
                     cont_m++;
                     if(cont_m == 2){
-                        printf("Jogador 1 GANHOU!");
+                        printf("\n\n\n");
+                                SetConsoleTextAttribute(12, 3);
+                                printf("\t\t\t\t\t\t Jogador 1 GANHOU!");
+                                SetConsoleTextAttribute(12, 7);
                         return 1;
                     }
                 }else if(v[j][i] == p_adv){
                     cont_adv++;
                     if(cont_adv == 2){
-                        printf("Jogador 2 GANHOU!");
+                        printf("\n\n\n");
+                                SetConsoleTextAttribute(12, 3);
+                                printf("\t\t\t\t\t\t Jogador 2 GANHOU!");
+                                SetConsoleTextAttribute(12, 7);
                         return 1;
                     }
                 }else{
@@ -279,13 +289,19 @@ int vitoria(int v[9][9], int m_peca, int p_adv){
                         if(v[m][t] == m_peca){
                             cont_m++;
                             if(cont_m == 2){
-                                printf("Jogador 1 GANHOU!");
+                                printf("\n\n\n");
+                                SetConsoleTextAttribute(12, 3);
+                                printf("\t\t\t\t\t\t Jogador 1 GANHOU!");
+                                SetConsoleTextAttribute(12, 7);
                                 return 1;
                             }
                         }else if(v[m][t] == p_adv){
                             cont_adv++;
                             if(cont_adv == 2){
-                                printf("Jogador 2 GANHOU!");
+                                printf("\n\n\n");
+                                SetConsoleTextAttribute(12, 3);
+                                printf("\t\t\t\t\t\t Jogador 2 GANHOU!");
+                                SetConsoleTextAttribute(12, 7);
                                 return 1;
                             }
                         }else{
@@ -299,13 +315,19 @@ int vitoria(int v[9][9], int m_peca, int p_adv){
                         if(v[m][t] == m_peca){
                             cont_m++;
                             if(cont_m == 2){
-                                printf("Jogador 1 GANHOU!");
+                                printf("\n\n\n");
+                                SetConsoleTextAttribute(12, 3);
+                                printf("\t\t\t\t\t\t Jogador 1 GANHOU!");
+                                SetConsoleTextAttribute(12, 7);
                                 return 1;
                             }
                         }else if(v[m][t] == p_adv){
                             cont_adv++;
                             if(cont_adv == 2){
-                                printf("Jogador 2 GANHOU!");
+                                printf("\n\n\n");
+                                SetConsoleTextAttribute(12, 3);
+                                printf("\t\t\t\t\t\t Jogador 2 GANHOU!");
+                                SetConsoleTextAttribute(12, 7);
                                 return 1;
                             }
                         }else{
@@ -514,19 +536,3 @@ int naCasa(int v[9][9]){
 
     return 0;
 }
-
-/*
-int recomeca(int *start){
-
-    printf(
-               "\n\n\n"
-               "Jogo finalizado!!! Deseja jogar novamente?\n"
-               "0 - Não\n"
-               "1 - Sim\n"
-               ">>> "
-               );
-        scanf("%d", &start);
-        printf("\n\n\n");
-
-    return start;
-}*/
