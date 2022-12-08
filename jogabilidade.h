@@ -127,7 +127,7 @@ int validaMovimento(int v[9][9], int a_lin, int a_col){
 
             if(j == a_col || i == a_lin  || a_lin - a_col == i - j || a_lin + a_col == i + j){
                 if(v[i][j] != v[a_lin][a_col] && v[i][j] == 0){
-                    
+
                     cont_movimento++;
 
                     if(j == a_col && i >= val_l[0] && i <= val_l[1])
@@ -142,7 +142,7 @@ int validaMovimento(int v[9][9], int a_lin, int a_col){
             }
         }
 
-    if(cont_movimento == 0){
+    if(cont_movimento > 0){
         return 1;
     }
 
@@ -283,7 +283,7 @@ int vitoria(int v[9][9], int m_peca, int p_adv){
 
     cont_m = 0;
     cont_adv = 0;
-    
+
     for(i = 0; i < 9; i++){
         for(j = 0; j < 9; j++){
 
@@ -315,7 +315,7 @@ int vitoria(int v[9][9], int m_peca, int p_adv){
                             cont_adv = 0;
                         }
                     }
-                    
+
                     // Diagonal secundária
                     else if(i + j == m + t){
                         if(v[m][t] == m_peca){
@@ -340,7 +340,7 @@ int vitoria(int v[9][9], int m_peca, int p_adv){
                             cont_m = 0;
                             cont_adv = 0;
                         }
-                    }                    
+                    }
                 }
             }
         }
@@ -400,6 +400,11 @@ int naCasa(int v[9][9]){
     a_lin = lin;
     a_col = col;
 
+    if(validaMovimento(v, a_lin, a_col) == 1){
+        printf("Jogador 2 VENCEU!!");
+        return 1;
+    }
+
     validaMovimento(v, a_lin, a_col);
 
     do{
@@ -444,14 +449,14 @@ int naCasa(int v[9][9]){
     for(i = 0; i < 9; i++)
         for(j = 0; j < 9; j++)
             if(v[i][j] == 5) v[i][j] = 0;
-    
+
 
     if(vitoria(v, 6, 7)){
         printf("\n\n");
         system("pause");
         return 1;
     }
-    
+
     system("cls");
 
 
@@ -491,6 +496,11 @@ int naCasa(int v[9][9]){
 
     a_lin = lin;
     a_col = col;
+
+    if(validaMovimento(v, a_lin, a_col) == 1){
+        printf("Jogador 2 VENCEU!!");
+        return 1;
+    }
 
     validaMovimento(v, a_lin, a_col);
 
