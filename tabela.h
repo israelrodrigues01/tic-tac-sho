@@ -46,52 +46,52 @@ jog_alf(int n){
     // Exibir peça jogador 1
     case 1:
         printf("[");
-        SetConsoleTextAttribute(7, 3); // 3 igual azul
+        SetConsoleTextAttribute(12, 3); // 3 igual azul
         printf("x");
-        SetConsoleTextAttribute(7, 6);
+        SetConsoleTextAttribute(12, 6);
         printf("]");
     break;
     // Exibir peça jogador 2
     case 2:
         printf("[");
-        SetConsoleTextAttribute(7, 4); // 4 igual vermelho
+        SetConsoleTextAttribute(12, 4); // 4 igual vermelho
         printf("o");
-        SetConsoleTextAttribute(7, 6);
+        SetConsoleTextAttribute(12, 6);
         printf("]");
     break;
     // Selecionado peça
     case 3:
-        SetConsoleTextAttribute(7, 10); // 10 igual verde
+        SetConsoleTextAttribute(12, 10); // 10 igual verde
         printf("[x]");
-        SetConsoleTextAttribute(7, 6);
+        SetConsoleTextAttribute(12, 6);
 
     break;
     // Selecionado peça
     case 4:
-        SetConsoleTextAttribute(7, 10); // 10 igual verde
+        SetConsoleTextAttribute(12, 10); // 10 igual verde
         printf("[o]");
-        SetConsoleTextAttribute(7, 6);
+        SetConsoleTextAttribute(12, 6);
     break;
     // Possivel caminho
     case 5:
-        SetConsoleTextAttribute(7, 10); // 10 igual verde
+        SetConsoleTextAttribute(12, 10); // 10 igual verde
         printf("[ ]");
-        SetConsoleTextAttribute(7, 6);
+        SetConsoleTextAttribute(12, 6);
     break;
     // Peça deixada após o movimento do jogador 1
     case 6:
         printf("[");
-        SetConsoleTextAttribute(7, 3); // 3 igual azul
+        SetConsoleTextAttribute(12, 3); // 3 igual azul
         printf("\4");
-        SetConsoleTextAttribute(7, 6);
+        SetConsoleTextAttribute(12, 6);
         printf("]");
     break;
     // Peça deixada após o movimento do jogador 2
     case 7:
         printf("[");
-        SetConsoleTextAttribute(7, 4); // 4 igual vermelho
+        SetConsoleTextAttribute(12, 4); // 4 igual vermelho
         printf("\4");
-        SetConsoleTextAttribute(7, 6);
+        SetConsoleTextAttribute(12, 6);
         printf("]");
     break;
     }
@@ -131,7 +131,7 @@ void exibeTabuleiro(int v[9][9]){
 
     printf("\t\t\t\t\t     ");
 
-    SetConsoleTextAttribute(7, 6);
+    SetConsoleTextAttribute(12, 6);
 
     for(co = 1; co <= 9; co++) col_alf(co);
 
@@ -146,6 +146,6 @@ void exibeTabuleiro(int v[9][9]){
         printf("\n");
     }
 
-    SetConsoleTextAttribute(7, 7);
+    SetConsoleTextAttribute(12, 7);
 
 }
